@@ -91,6 +91,28 @@ val screens = listOf(View.Home, View.FavoriteMovies, View.Settings)
         }
         )
 
+        NavigationBarItem (
+            icon = { Icon(View.FavoriteMovies.icon, contentDescription = View.FavoriteMovies.title)},
+            label = { Text(View.FavoriteMovies.title)},
+            selected = false,
+            onClick = {
+                navController.navigate(View.FavoriteMovies.route) {
+
+                }
+            }
+        )
+
+        NavigationBarItem (
+            icon = { Icon(View.Settings.icon, contentDescription = View.Settings.title)},
+            label = { Text(View.Settings.title)},
+            selected = false,
+            onClick = {
+                navController.navigate(View.Settings.route) {
+
+                }
+            }
+        )
+
     }
 }
 @Composable
@@ -99,6 +121,12 @@ fun NavGraph(navController: NavHostController, modifier: Modifier) {
     NavHost(navController, startDestination = View.Home.route, modifier = Modifier) {
         composable(View.Home.route) {
             Home()
+        }
+        composable(View.FavoriteMovies.route) {
+            FavoriteMovies()
+        }
+        composable(View.Settings.route) {
+            SettingScreen()
         }
     }
 

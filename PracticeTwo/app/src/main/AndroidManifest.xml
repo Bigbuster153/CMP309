@@ -11,16 +11,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticeTwo">
+
+        <!-- set to true so it can be run seperated from the rest of the app-->
+        <activity
+            android:name=".week5nav"
+            android:exported="true"
+            android:label="@string/title_activity_week_five_nav"
+            android:theme="@style/Theme.PracticeTwo"
+            >
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".WeekFiveNav"
             android:exported="true"
             android:label="@string/title_activity_week_five_navigation"
             android:theme="@style/Theme.PracticeTwo">
-            <intent-filter>
+
+        </activity>
+        <!-- removed from above activity
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        -->
         <activity
             android:name=".composeTraining"
             android:exported="false"
@@ -40,12 +62,8 @@
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PracticeTwo"/>
-        <activity
-            android:name=".PipelinePrintActivity"
-            android:exported="false"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.PracticeTwo"/>
+            android:theme="@style/Theme.PracticeTwo" />
+
     </application>
 
 </manifest>

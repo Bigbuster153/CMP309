@@ -1,6 +1,7 @@
 package com.example.practicetwo
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +13,19 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.practicetwo.ui.theme.SadTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.NavigationBar
 import androidx.compose.ui.Alignment
 import androidx.navigation.NavHostController
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
-class week5nav : AppCompatActivity() {
+class week5nav : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,6 +39,12 @@ class week5nav : AppCompatActivity() {
 
 @Composable
 fun MainView(){
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = { BottomBar(navController = navController) }
+    ) { innerPadding ->
+        NavGraph(navController = navController, modifier = Modifier.padding(innerPadding))
+    }
 
 }
 @Composable
@@ -60,10 +76,30 @@ fun SettingScreen(){
 }
 
 @Composable
-fun BottomBar(NavController: NavHostController){
+fun BottomBar(navController: NavHostController){
+val screens = listOf(View.Home, View.FavoriteMovies, View.Settings)
 
+    NavigationBar {
+        NavigationBarItem (
+        icon = { Icon(View.Home.icon, contentDescription = View.Home.title)},
+        label = { Text(View.Home.title)},
+        selected = true,
+        onClick = {
+            navController.navigate(View.Home.route) {
+
+            }
+        }
+        )
+
+    }
 }
 @Composable
-fun NavGraph(NavHostController: NavHostController, Modifier: Modifier) {
+fun NavGraph(navController: NavHostController, modifier: Modifier) {
+
+    NavHost(navController, startDestination = View.Home.route, modifier = Modifier) {
+        composable(View.Home.route) {
+            Home()
+        }
+    }
 
 }

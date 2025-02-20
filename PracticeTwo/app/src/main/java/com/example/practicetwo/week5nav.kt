@@ -96,44 +96,12 @@ fun BottomBar(navController: NavHostController){
                 selected = currentRoute == View.route,
                 onClick = {
                     navController.navigate(View.route) {
+                        //so it doesn't create multiple instances of the same screen when clicked multiple times
                         launchSingleTop = true
                     }
                 }
             )
         }
-//        NavigationBarItem (
-//        icon = { Icon(View.Home.icon, contentDescription = View.Home.title)},
-//        label = { Text(View.Home.title)},
-//        selected = currentRoute == View.Home.route,
-//        onClick = {
-//            navController.navigate(View.Home.route) {
-//
-//            }
-//        }
-//        )
-//
-//        NavigationBarItem (
-//            icon = { Icon(View.FavoriteMovies.icon, contentDescription = View.FavoriteMovies.title)},
-//            label = { Text(View.FavoriteMovies.title)},
-//            selected = currentRoute == View.FavoriteMovies.route,
-//            onClick = {
-//                navController.navigate(View.FavoriteMovies.route) {
-//
-//                }
-//
-//            }
-//        )
-//
-//        NavigationBarItem (
-//            icon = { Icon(View.Settings.icon, contentDescription = View.Settings.title)},
-//            label = { Text(View.Settings.title)},
-//            selected = currentRoute == View.Settings.route,
-//            onClick = {
-//                navController.navigate(View.Settings.route) {
-//
-//                }
-//            }
-//        )
 
     }
 }

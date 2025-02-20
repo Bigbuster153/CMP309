@@ -50,6 +50,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -141,10 +142,11 @@ fun StartMyApp(names: List<String>) {
 
 
 @Composable
-fun UserManagement(modifier: Modifier = Modifier, names: List<String>?) {
+fun UserManagement(names: List<String>?) {
     Surface(
         // color = MaterialTheme.colorScheme.error,
-        modifier = Modifier.padding(20.dp)
+        modifier = Modifier.navigationBarsPadding()
+            .padding(bottom = 56.dp)
     ) {
         /*
              ____                 _   _           _   _  _             _____                   _
@@ -278,7 +280,7 @@ fun UserItem(name: String) {
              *
                          * */
         Row() {
-            Column(modifier = Modifier.padding(10.dp)/*.fillMaxWidth(0.8f)*/) {
+            Column(modifier = Modifier.padding(10.dp).weight(0.5f)/*.fillMaxWidth(0.8f)*/) {
                 Text("User, $name")
                 //Add another text component to show user name
                 //Add a placeholder image that becomes visible when user clicks the button
@@ -288,7 +290,7 @@ fun UserItem(name: String) {
             }
             Column(modifier = Modifier
                 .padding(10.dp)
-                .fillMaxWidth(1f)) {//change padding and add other modifiers
+                .weight(0.5f)) {//change padding and add other modifiers
                 /* Exercise
                 *
                 *

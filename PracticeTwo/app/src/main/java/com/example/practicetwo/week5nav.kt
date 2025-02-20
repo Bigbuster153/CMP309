@@ -48,8 +48,9 @@ fun MainView(){
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomBar(navController = navController) }
-    ) { innerPadding ->
-        NavGraph(navController = navController, modifier = Modifier.padding(innerPadding))
+    ) {
+        NavGraph(navController = navController)
+
     }
 
 }
@@ -106,15 +107,24 @@ fun BottomBar(navController: NavHostController){
     }
 }
 @Composable
-fun NavGraph(navController: NavHostController, modifier: Modifier) {
+fun NavGraph(navController: NavHostController) {
 
-    NavHost(navController, startDestination = View.Home.route, modifier = Modifier) {
+    NavHost(navController, startDestination = Screen.Home.route) {
         //when given that path, it will change the view to this function
         composable(View.Home.route) {
             Home()
         }
         composable(View.FavoriteMovies.route) {
             FavoriteMovies()
+            UserManagement(
+                listOf(
+                    "Iron Man",
+                    "Snatch",
+                    "Forrest Gump",
+                    "Cars",
+                    "Fast and Furious"
+                )
+            )
         }
         composable(View.Settings.route) {
             SettingScreen()

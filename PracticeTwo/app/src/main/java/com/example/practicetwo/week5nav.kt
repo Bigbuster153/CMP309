@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -88,39 +89,51 @@ fun BottomBar(navController: NavHostController){
 
     NavigationBar {
         //3 items, one for each button
-        NavigationBarItem (
-        icon = { Icon(View.Home.icon, contentDescription = View.Home.title)},
-        label = { Text(View.Home.title)},
-        selected = currentRoute == View.Home.route,
-        onClick = {
-            navController.navigate(View.Home.route) {
-
-            }
+        screens.forEach{ View ->
+            NavigationBarItem(
+                icon = { Icon(View.icon, contentDescription = View.title) },
+                label = { Text(View.title) },
+                selected = currentRoute == View.route,
+                onClick = {
+                    navController.navigate(View.route) {
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
-        )
-
-        NavigationBarItem (
-            icon = { Icon(View.FavoriteMovies.icon, contentDescription = View.FavoriteMovies.title)},
-            label = { Text(View.FavoriteMovies.title)},
-            selected = currentRoute == View.FavoriteMovies.route,
-            onClick = {
-                navController.navigate(View.FavoriteMovies.route) {
-
-                }
-
-            }
-        )
-
-        NavigationBarItem (
-            icon = { Icon(View.Settings.icon, contentDescription = View.Settings.title)},
-            label = { Text(View.Settings.title)},
-            selected = currentRoute == View.Settings.route,
-            onClick = {
-                navController.navigate(View.Settings.route) {
-
-                }
-            }
-        )
+//        NavigationBarItem (
+//        icon = { Icon(View.Home.icon, contentDescription = View.Home.title)},
+//        label = { Text(View.Home.title)},
+//        selected = currentRoute == View.Home.route,
+//        onClick = {
+//            navController.navigate(View.Home.route) {
+//
+//            }
+//        }
+//        )
+//
+//        NavigationBarItem (
+//            icon = { Icon(View.FavoriteMovies.icon, contentDescription = View.FavoriteMovies.title)},
+//            label = { Text(View.FavoriteMovies.title)},
+//            selected = currentRoute == View.FavoriteMovies.route,
+//            onClick = {
+//                navController.navigate(View.FavoriteMovies.route) {
+//
+//                }
+//
+//            }
+//        )
+//
+//        NavigationBarItem (
+//            icon = { Icon(View.Settings.icon, contentDescription = View.Settings.title)},
+//            label = { Text(View.Settings.title)},
+//            selected = currentRoute == View.Settings.route,
+//            onClick = {
+//                navController.navigate(View.Settings.route) {
+//
+//                }
+//            }
+//        )
 
     }
 }

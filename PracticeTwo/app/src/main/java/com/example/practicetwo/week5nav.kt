@@ -20,9 +20,14 @@ import androidx.navigation.NavHostController
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 class week5nav : ComponentActivity() {
@@ -77,13 +82,16 @@ fun SettingScreen(){
 
 @Composable
 fun BottomBar(navController: NavHostController){
-val screens = listOf(View.Home, View.FavoriteMovies, View.Settings)
+    val screens = listOf(View.Home, View.FavoriteMovies, View.Settings)
+    val navBackStackEntry by navController.currentBackStackEntryAsState() //checks for changes in the backstack
+    val currentRoute = navBackStackEntry?.destination?.route //gets the route of the current destination
 
     NavigationBar {
+        //3 items, one for each button
         NavigationBarItem (
         icon = { Icon(View.Home.icon, contentDescription = View.Home.title)},
         label = { Text(View.Home.title)},
-        selected = true,
+        selected = currentRoute == View.Home.route,
         onClick = {
             navController.navigate(View.Home.route) {
 
@@ -94,18 +102,19 @@ val screens = listOf(View.Home, View.FavoriteMovies, View.Settings)
         NavigationBarItem (
             icon = { Icon(View.FavoriteMovies.icon, contentDescription = View.FavoriteMovies.title)},
             label = { Text(View.FavoriteMovies.title)},
-            selected = false,
+            selected = currentRoute == View.FavoriteMovies.route,
             onClick = {
                 navController.navigate(View.FavoriteMovies.route) {
 
                 }
+
             }
         )
 
         NavigationBarItem (
             icon = { Icon(View.Settings.icon, contentDescription = View.Settings.title)},
             label = { Text(View.Settings.title)},
-            selected = false,
+            selected = currentRoute == View.Settings.route,
             onClick = {
                 navController.navigate(View.Settings.route) {
 
@@ -119,6 +128,7 @@ val screens = listOf(View.Home, View.FavoriteMovies, View.Settings)
 fun NavGraph(navController: NavHostController, modifier: Modifier) {
 
     NavHost(navController, startDestination = View.Home.route, modifier = Modifier) {
+        //when given that path, it will change the view to this function
         composable(View.Home.route) {
             Home()
         }
